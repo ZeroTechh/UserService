@@ -3,7 +3,7 @@ package validate
 import (
 	"reflect"
 
-	"github.com/ZeroTechh/VelocityCentral/logger"
+	"github.com/ZeroTechh/VelocityCore/logger"
 	"github.com/ZeroTechh/blaze"
 	"github.com/ZeroTechh/hades"
 	"github.com/ZeroTechh/sentinal/v2"
