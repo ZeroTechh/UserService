@@ -1,0 +1,39 @@
+service:
+  debug: true
+  logFile: "user_service.log"
+  lowLevelLogFile: "user_service_low_level.log"
+  validateLogFile: "user_validate.log"
+
+database:
+  address: "127.0.0.1:27017"
+  db: "UserServiceDB"
+  collections:
+    main: "UserMainData"
+    extra: "UserExtraData"
+    meta: "UserMetaData"
+
+userMainData:
+  uniqueFields:
+    - UserID
+    - Username
+    - Email
+
+userExtraData:
+  accountStatus:
+    verified: "Verfied" # When the account is verified with email
+    unverified: "Unverified" # When the account is not verified with email
+    deleted: "Deleted" # When the account is deleted
+  genders:
+    male: "male"
+    female: "female"
+    other: "other"
+  uniqueFields:
+    - UserID
+
+messages:
+  usernameExists: "Username Already Exists"
+  emailExists: "Email Already Exists"
+  invalidUsernameOrEmail: "The username or email is invalid"
+  invalidPassword: "Password is invalid"
+  invalidUserData: "User data is invalid"
+  invalidAuthData: "Auth data is invalid"
