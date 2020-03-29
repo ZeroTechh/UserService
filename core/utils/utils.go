@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ZeroTechh/UserService/types"
+	"github.com/ZeroTechh/UserService/core/types"
 )
 
 func generateRandomString(length int) string {
