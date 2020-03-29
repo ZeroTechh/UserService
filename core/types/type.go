@@ -25,10 +25,10 @@ type UserMeta struct {
 }
 
 var (
-	// TypeMain is for main data
-	TypeMain = "main"
-	// TypeExtra is for extra data
-	TypeExtra = "extra"
-	// TypeMeta is for meta data
-	TypeMeta = "meta"
+	// Main is for main data
+	Main = "main"
+	// Extra is for extra data
+	Extra = "extra"
+	// Meta is for meta data
+	Meta = "meta"
 )
