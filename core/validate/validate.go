@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	config = hades.GetConfig("main.yaml", []string{"config", "../config"})
+	config = hades.GetConfig("main.yaml", []string{"config", "../config", "../../config"})
 	log    = logger.GetLogger(
 		config.Map("service").Str("validateLogFile"),
 		config.Map("service").Bool("debug"),
