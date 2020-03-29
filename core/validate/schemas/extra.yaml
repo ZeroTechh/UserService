@@ -1,0 +1,17 @@
+FirstName:
+  minLen: "2"
+  maxLen: "100"
+  notContains: " "
+  notHasUpperCase: "true"
+
+LastName:
+  minLen: "2"
+  maxLen: "100"
+  notContains: " "
+  notHasUpperCase: "true"
+
+Gender: 
+  isGender: "true"
+
+BirthdayUTC:
+  age: "14"

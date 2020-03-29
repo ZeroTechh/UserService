@@ -23,3 +23,12 @@ type UserMeta struct {
 	AccountStatus      string `bson:"AccountStatus,omitempty,-"`
 	AccountCreationUTC int64  `bson:"AccountCreationUTC,omitempty,-"`
 }
+
+var (
+	// TypeMain is for main data
+	TypeMain = "main"
+	// TypeExtra is for extra data
+	TypeExtra = "extra"
+	// TypeMeta is for meta data
+	TypeMeta = "meta"
+)
