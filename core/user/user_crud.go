@@ -63,12 +63,7 @@ func (user User) Update(filter interface{}, update interface{}, dataType string)
 }
 
 // Auth validates user's username or email and password
-func (user User) Auth(username, email, password string) bool {
-	filter := types.UserMain{Username: username}
-	if email != "" {
-		filter = types.UserMain{Email: email}
-	}
-
+func (user User) Auth(filter interface{}, password string) bool {
 	var userData types.UserMain
 	msg := user.Get(filter, mainColl, &userData)
 	if msg != "" {
