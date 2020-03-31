@@ -75,16 +75,19 @@ func TestUser(t *testing.T) {
 
 	// Testing user.Auth
 	// Testing that valid is true for valid auth data
-	valid := user.Auth(types.UserMain{Username: main.Username}, main.Password)
+	valid, userID := user.Auth(types.UserMain{Username: main.Username}, main.Password)
 	assert.True(valid)
+	assert.NotZero(userID)
 
 	// Testing that valid is false for invalid password
-	valid = user.Auth(types.UserMain{Username: main.Username}, "")
+	valid, userID = user.Auth(types.UserMain{Username: main.Username}, "")
 	assert.False(valid)
+	assert.Zero(userID)
 
 	// Testing that valid is false for invalid filter
-	valid = user.Auth(types.UserMain{Username: "ss"}, main.Password)
+	valid, userID = user.Auth(types.UserMain{Username: "ss"}, main.Password)
 	assert.False(valid)
+	assert.Zero(userID)
 
 	// Testing user.Activate
 	msg = user.Activate(main.Email)

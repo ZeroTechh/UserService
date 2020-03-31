@@ -63,15 +63,18 @@ func (user User) Update(filter interface{}, update interface{}, dataType string)
 }
 
 // Auth validates user's username or email and password
-func (user User) Auth(filter interface{}, password string) bool {
+func (user User) Auth(filter interface{}, password string) (bool, string) {
 	var userData types.UserMain
 	msg := user.Get(filter, mainColl, &userData)
 	if msg != "" {
-		return false
+		return false, ""
 	}
 
 	// TODO Add password hashing
-	return userData.Password == password
+	if userData.Password == password {
+		return true, userData.UserID
+	}
+	return false, ""
 }
 
 // Activate marks user as activated
