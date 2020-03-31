@@ -20,16 +20,16 @@ func generateRandomString(length int) string {
 }
 
 // GetMockUserData returns mock user data for testing
-func GetMockUserData() (types.UserMain, types.UserExtra) {
+func GetMockUserData() (types.Main, types.Extra) {
 	mockUsername := strings.ToLower(generateRandomString(10))
 	mockPassword := generateRandomString(10)
-	mockUserData := types.UserMain{
+	mockUserData := types.Main{
 		Username: mockUsername,
 		Password: mockPassword,
 		Email:    mockUsername + "@gmail.com",
 	}
 
-	mockUserExtraData := types.UserExtra{
+	mockUserExtraData := types.Extra{
 		FirstName:   mockUsername,
 		LastName:    mockUsername,
 		Gender:      "male",
