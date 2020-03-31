@@ -1,15 +1,15 @@
 package types
 
-// UserMain is used to store user main data
-type UserMain struct {
+// Main is used to store user main data
+type Main struct {
 	UserID   string `bson:"_id,omitempty,-"`
 	Username string `bson:"Username,omitempty,-"`
 	Email    string `bson:"Email,omitempty,-"`
 	Password string `bson:"Password,omitempty,-"`
 }
 
-// UserExtra is used to store user extra data
-type UserExtra struct {
+// Extra is used to store user extra data
+type Extra struct {
 	UserID      string `bson:"_id,omitempty,-"`
 	FirstName   string `bson:"FirstName,omitempty,-"`
 	LastName    string `bson:"LastName,omitempty,-"`
@@ -17,18 +17,9 @@ type UserExtra struct {
 	BirthdayUTC int64  `bson:"BirthdayUTC,omitempty,-"`
 }
 
-// UserMeta is used to store user meta data
-type UserMeta struct {
+// Meta is used to store user meta data
+type Meta struct {
 	UserID             string `bson:"_id,omitempty,-"`
 	AccountStatus      string `bson:"AccountStatus,omitempty,-"`
 	AccountCreationUTC int64  `bson:"AccountCreationUTC,omitempty,-"`
 }
-
-var (
-	// Main is for main data
-	Main = "main"
-	// Extra is for extra data
-	Extra = "extra"
-	// Meta is for meta data
-	Meta = "meta"
-)
