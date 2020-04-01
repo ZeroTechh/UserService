@@ -9,7 +9,7 @@ import (
 	"github.com/ZeroTechh/UserService/core/utils"
 )
 
-func TestMeta(t *testing.T) {
+func TestExtra(t *testing.T) {
 	assert := assert.New(t)
 
 	extra := NewExtra()
