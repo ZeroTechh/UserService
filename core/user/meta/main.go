@@ -16,7 +16,6 @@ var (
 	config          = hades.GetConfig("main.yaml", []string{"config", "../../../config"})
 	dbConfig        = config.Map("database")
 	metaCollection  = dbConfig.Map("collections").Str("meta")
-	debugMode       = config.Map("service").Bool("debug")
 	accountStatuses = config.Map("accountStatuses")
 
 	log = logger.GetLogger(
