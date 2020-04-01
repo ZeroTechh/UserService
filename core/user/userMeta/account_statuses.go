@@ -1,4 +1,4 @@
-package meta
+package userMeta
 
 // AccountStatuses refers to status of account
 type AccountStatuses int
