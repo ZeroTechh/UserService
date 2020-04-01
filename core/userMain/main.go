@@ -13,7 +13,7 @@ import (
 
 var (
 	// all the configs
-	config         = hades.GetConfig("main.yaml", []string{"config", "../../../config"})
+	config         = hades.GetConfig("main.yaml", []string{"config", "../../config"})
 	dbConfig       = config.Map("database")
 	mainCollection = dbConfig.Map("collections").Str("main")
 	log            = logger.GetLogger(
