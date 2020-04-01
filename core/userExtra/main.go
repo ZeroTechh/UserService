@@ -23,8 +23,8 @@ var (
 	invalidDataMsg = config.Map("messages").Str("invalidUserData")
 )
 
-// NewExtra returns a new extra handler struct
-func NewExtra() *Extra {
+// New returns a new extra handler struct
+func New() *Extra {
 	extra := Extra{}
 	extra.init()
 	return &extra

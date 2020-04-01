@@ -12,7 +12,7 @@ import (
 func TestExtra(t *testing.T) {
 	assert := assert.New(t)
 
-	extra := NewExtra()
+	extra := New()
 
 	// Testing that extra can add and get user extra data
 	_, data := utils.GetMockUserData()

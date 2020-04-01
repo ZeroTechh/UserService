@@ -23,8 +23,8 @@ var (
 	invalidDataMsg = config.Map("messages").Str("invalidUserData")
 )
 
-// NewMain returns a new main handler struct
-func NewMain() *Main {
+// New returns a new main handler struct
+func New() *Main {
 	main := Main{}
 	main.init()
 	return &main

@@ -12,7 +12,7 @@ import (
 func TestMain(t *testing.T) {
 	assert := assert.New(t)
 
-	main := NewMain()
+	main := New()
 
 	// Testing that Main can add and get user Main data
 	data, _ := utils.GetMockUserData()
