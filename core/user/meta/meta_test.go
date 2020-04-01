@@ -18,8 +18,13 @@ func TestMeta(t *testing.T) {
 	meta.Create(data.UserID)
 	assert.NotZero(meta.Get(data.UserID))
 
-	// Testing that meta can activate user's data
-	meta.Activate(data.UserID)
+	// Testing that meta can verify user's data
+	meta.ChangeStatus(data.UserID, VERIFIED)
 	metaData := meta.Get(data.UserID)
 	assert.Equal(accountStatuses.Str("verified"), metaData.AccountStatus)
+
+	// Testing that meta can delete user's data
+	meta.ChangeStatus(data.UserID, DELETED)
+	metaData = meta.Get(data.UserID)
+	assert.Equal(accountStatuses.Str("deleted"), metaData.AccountStatus)
 }

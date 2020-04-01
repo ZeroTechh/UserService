@@ -28,7 +28,7 @@ var (
 func generate(userID string) types.Meta {
 	return types.Meta{
 		UserID:             userID,
-		AccountStatus:      accountStatuses.Str("unverified"),
+		AccountStatus:      UNVERIFIED.String(),
 		AccountCreationUTC: time.Now().Unix(),
 	}
 }
@@ -67,11 +67,9 @@ func (meta Meta) Get(userID string) (data types.Meta) {
 	return
 }
 
-// Activate marks user as verified
-func (meta Meta) Activate(userID string) {
-	update := types.Meta{
-		AccountStatus: accountStatuses.Str("verified"),
-	}
+// ChangeStatus changes user status to some status
+func (meta Meta) ChangeStatus(userID string, status AccountStatuses) {
+	update := types.Meta{AccountStatus: status.String()}
 	filter := types.Meta{UserID: userID}
 	meta.collection.UpdateOne(
 		context.TODO(),
