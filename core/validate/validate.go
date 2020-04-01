@@ -1,7 +1,6 @@
 package validate
 
 import (
-	"fmt"
 	"reflect"
 
 	"github.com/ZeroTechh/VelocityCore/logger"
@@ -12,12 +11,12 @@ import (
 )
 
 var (
-	config = hades.GetConfig("main.yaml", []string{"config", "../config", "../../config"})
+	config = hades.GetConfig("main.yaml", []string{"config", "../config", "../../config", "../../../config"})
 	log    = logger.GetLogger(
 		config.Map("service").Str("validateLogFile"),
 		config.Map("service").Bool("debug"),
 	)
-	schemaPaths = []string{"schemas", "validate/schemas", "../validate/schemas", "core/validate/schemas"}
+	schemaPaths = []string{"schemas", "validate/schemas", "../validate/schemas", "core/validate/schemas", "../../validate/schemas"}
 )
 
 // IsValid checks if data is valid
@@ -46,8 +45,6 @@ func IsValid(data interface{}, dataType string, isUpdate bool) bool {
 			customFuncs,
 		)
 	} else {
-		fmt.Println(schemaFile)
-		fmt.Println(schemaPaths)
 		valid, msg, err = sentinal.ValidateFieldsWithYAML(
 			data,
 			schemaFile,

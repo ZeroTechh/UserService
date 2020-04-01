@@ -19,16 +19,15 @@ userMainData:
     - Email
 
 userExtraData:
-  accountStatuses:
-    verified: "Verfied" # When the account is verified with email
-    unverified: "Unverified" # When the account is not verified with email
-    deleted: "Deleted" # When the account is deleted
   genders:
     male: "male"
     female: "female"
     other: "other"
-  uniqueFields:
-    - UserID
+
+accountStatuses:
+    verified: "Verfied" # When the account is verified with email
+    unverified: "Unverified" # When the account is not verified with email
+    deleted: "Deleted" # When the account is deleted
 
 messages:
   usernameExists: "Username Already Exists"
