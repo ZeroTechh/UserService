@@ -14,30 +14,49 @@ func TestMain(t *testing.T) {
 
 	main := New()
 
-	// Testing that Main can add and get user Main data
+	// Testing Create and Get function
 	data, _ := utils.GetMockUserData()
 	filter := types.Main{UserID: data.UserID}
 	msg := main.Create(data)
 	assert.Zero(msg)
 	assert.Equal(data, main.Get(filter))
 
-	// Testing that it returns invalid data message for invalid data
+	// Testing Create returns invalid data message
 	msg = main.Create(types.Main{})
 	assert.NotZero(msg)
 
-	// Testing that Main can update user Main data
-	data, _ = utils.GetMockUserData() // generating new data to get new username
-	name := data.Username
-	update := types.Main{Username: name}
-	msg = main.Update(filter, update)
-	assert.Zero(msg)
-	assert.Equal(name, main.Get(filter).Username)
+	// Testing that add user returns username exists message
+	data2, _ := utils.GetMockUserData()
+	data2.Username = data.Username
+	msg = main.Create(data2)
+	assert.Equal(messages.Str("usernameExists"), msg)
 
-	// Testing that it returns invalid data message for invalid data
-	msg = main.Update(filter, types.Main{Username: "CC"}) // should fail as there are capital letters
+	// Testing that add user returns email exists message
+	data2, _ = utils.GetMockUserData()
+	data2.Email = data.Email
+	msg = main.Create(data2)
+	assert.Equal(messages.Str("emailExists"), msg)
+
+	// Testing update function
+	data2, _ = utils.GetMockUserData()
+	msg = main.Update(
+		types.Main{UserID: data.UserID},
+		types.Main{Username: data.Username},
+	)
+	assert.Zero(msg)
+
+	// Testing update returns invalid data
+	msg = main.Update(
+		types.Main{UserID: data.UserID},
+		types.Main{Username: "INVALIDUSERNAME"},
+	)
 	assert.NotZero(msg)
 
 	// Testing Auth
 	assert.True(main.Auth(data.Username, "", data.Password))
-	assert.False(main.Auth("invalidUsername", "", data.Password))
+	assert.False(main.Auth(data.Username, "", "INVALIDPASSWORD"))
+
+	// Testing generation of id
+	id := main.generateID()
+	assert.NotZero(id)
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/ZeroTechh/VelocityCore/logger"
 	"github.com/ZeroTechh/VelocityCore/utils"
 	"github.com/ZeroTechh/hades"
+	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -20,7 +21,8 @@ var (
 		config.Map("service").Str("lowLevelLogFile"),
 		config.Map("service").Bool("debug"),
 	)
-	invalidDataMsg = config.Map("messages").Str("invalidUserData")
+	messages       = config.Map("messages")
+	invalidDataMsg = messages.Str("invalidUserData")
 )
 
 // New returns a new main handler struct
@@ -44,11 +46,39 @@ func (main *Main) init() {
 	main.collection = main.database.Collection(mainCollection)
 }
 
+func (main Main) generateID() string {
+	userIDExists := true
+	var userID uuid.UUID
+
+	for userIDExists {
+		userID, _ = uuid.NewRandom()
+		userIDExists = main.Exists(
+			types.Main{UserID: userID.String()},
+		)
+	}
+
+	return userID.String()
+}
+
+// Exists checks if user with certain field exists
+func (main Main) Exists(filter types.Main) bool {
+	return main.Get(filter) != types.Main{}
+}
+
 // Create is used to add new main data
 func (main Main) Create(data types.Main) string {
 	if !validate.IsValid(data, "main", false) {
 		return invalidDataMsg
 	}
+
+	usernameExists := main.Exists(types.Main{Username: data.Username})
+	emailExists := main.Exists(types.Main{Email: data.Email})
+	if usernameExists {
+		return messages.Str("usernameExists")
+	} else if emailExists {
+		return messages.Str("emailExists")
+	}
+
 	main.collection.InsertOne(context.TODO(), data)
 	return ""
 }
@@ -75,5 +105,6 @@ func (main Main) Update(filter types.Main, update types.Main) string {
 // Auth is used to authenticate username, email or password
 func (main Main) Auth(username, email, password string) bool {
 	filter := types.Main{Username: username, Email: email}
-	return main.Get(filter).Password == password
+	data := main.Get(filter)
+	return data.Password == password && data != types.Main{}
 }
