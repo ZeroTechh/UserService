@@ -14,7 +14,7 @@ import (
 
 var (
 	// all the configs
-	config         = hades.GetConfig("main.yaml", []string{"config", "../../config"})
+	config         = hades.GetConfig("main.yaml", []string{"config", "../../config", "../../../config"})
 	dbConfig       = config.Map("database")
 	mainCollection = dbConfig.Map("collections").Str("main")
 	log            = logger.GetLogger(
@@ -46,7 +46,8 @@ func (main *Main) init() {
 	main.collection = main.database.Collection(mainCollection)
 }
 
-func (main Main) generateID() string {
+// GenerateID is used to generate an user id
+func (main Main) GenerateID() string {
 	userIDExists := true
 	var userID uuid.UUID
 

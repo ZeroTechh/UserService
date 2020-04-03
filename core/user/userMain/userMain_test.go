@@ -57,6 +57,6 @@ func TestMain(t *testing.T) {
 	assert.False(main.Auth(data.Username, "", "INVALIDPASSWORD"))
 
 	// Testing generation of id
-	id := main.generateID()
+	id := main.GenerateID()
 	assert.NotZero(id)
 }
