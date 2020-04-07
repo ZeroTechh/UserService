@@ -33,8 +33,8 @@ func generate(userID string) types.Meta {
 	}
 }
 
-// NewMeta returns a new meta handler struct
-func NewMeta() *Meta {
+// New returns a new meta handler struct
+func New() *Meta {
 	meta := Meta{}
 	meta.init()
 	return &meta

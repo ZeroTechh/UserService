@@ -1,30 +1,24 @@
 package user
 
 import (
-	"context"
-
 	"github.com/ZeroTechh/UserService/core/types"
+
 	"github.com/ZeroTechh/UserService/core/user/userExtra"
 	"github.com/ZeroTechh/UserService/core/user/userMain"
 	"github.com/ZeroTechh/UserService/core/user/userMeta"
-	"github.com/ZeroTechh/VelocityCore/logger"
-	proto "github.com/ZeroTechh/VelocityCore/proto/UserService"
-	"github.com/ZeroTechh/blaze"
-	"github.com/ZeroTechh/hades"
-	"go.uber.org/zap"
 )
 
 // User handles user data
 type User struct {
-	main userMain.Main
-	extra userExtra.Extra
-	meta userMeta.Meta
+	main *userMain.Main
+	extra *userExtra.Extra
+	meta *userMeta.Meta
 }
 
 func(user User) init() {
-	user.main := userMain.New()
-	user.extra := userExtra.New()
-	user.meta := userMeta.New()
+	user.main = userMain.New()
+	user.extra = userExtra.New()
+	user.meta = userMeta.New()
 }
 
 // Adds adds user to database and returns userID
