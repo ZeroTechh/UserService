@@ -102,10 +102,3 @@ func (main Main) Update(filter types.Main, update types.Main) string {
 	)
 	return ""
 }
-
-// Auth is used to authenticate username, email or password
-func (main Main) Auth(username, email, password string) bool {
-	filter := types.Main{Username: username, Email: email}
-	data := main.Get(filter)
-	return data.Password == password && data != types.Main{}
-}
