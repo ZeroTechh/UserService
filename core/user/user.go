@@ -8,6 +8,13 @@ import (
 	"github.com/ZeroTechh/UserService/core/user/userMeta"
 )
 
+// New returns new user data manager
+func New() *User {
+	user := User{}
+	user.init()
+	return &user
+}
+
 // User handles user data
 type User struct {
 	main  *userMain.Main
@@ -15,30 +22,30 @@ type User struct {
 	meta  *userMeta.Meta
 }
 
-func (user User) init() {
+func (user *User) init() {
 	user.main = userMain.New()
 	user.extra = userExtra.New()
 	user.meta = userMeta.New()
 }
 
 // Add adds user to database and returns userID
-func (user User) Add(main types.Main, extra types.Extra) (userID string, msg string) {
-	userID = user.main.GenerateID()
+func (user User) Add(main types.Main, extra types.Extra) (string, string) {
+	userID := user.main.GenerateID()
 	main.UserID = userID
 	extra.UserID = userID
 
-	msg = user.main.Create(main)
+	msg := user.main.Create(main)
 	if msg != "" {
-		return
+		return "", msg
 	}
 
 	msg = user.extra.Create(extra)
 	if msg != "" {
-		return
+		return "", msg
 	}
 
 	user.meta.Create(userID)
-	return
+	return userID, ""
 }
 
 // GetFromID gets the user data (either main, meta or extra) based on userID then returns it

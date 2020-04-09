@@ -24,14 +24,12 @@ func GetMockUserData() (types.Main, types.Extra) {
 	mockUsername := strings.ToLower(generateRandomString(10))
 	mockPassword := generateRandomString(10)
 	mockUserData := types.Main{
-		UserID:   mockUsername,
 		Username: mockUsername,
 		Password: mockPassword,
 		Email:    mockUsername + "@gmail.com",
 	}
 
 	mockUserExtraData := types.Extra{
-		UserID:      mockUsername,
 		FirstName:   mockUsername,
 		LastName:    mockUsername,
 		Gender:      "male",
